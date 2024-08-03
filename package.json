@@ -1,8 +1,8 @@
 {
   "scripts": {
     "start:dev": "nodemon server.js",
-    "start": "npm start.js",
-    "import": "npm importData.js"
+    "start": "node server.js",
+    "import": "node importData.js"
   },
   "name": "server",
   "version": "1.0.0",
