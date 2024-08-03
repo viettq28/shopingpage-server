@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const cors = require('cors');
 const morgan = require('morgan');
+const compression = require('compression');
 const cookieParser = require('cookie-parser');
 const globalErrorHandler = require('./controllers/errorController');
 
@@ -32,6 +33,8 @@ if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 
+app.use(compression());
+
 
 app.use((req, res, next) => {
   // console.log(req.body);
@@ -47,6 +50,12 @@ app.use('/api/v1/stats', statRouter);
 
 // 3.Global error handler
 app.use(globalErrorHandler);
+
+process.on('SIGTERM', () => {
+  server.close(() => {
+    console.log("SERVER TERMINATED");
+  });
+})
 
 
 module.exports = app
