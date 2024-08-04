@@ -57,7 +57,6 @@ exports.createProduct = catchAsync(async (req, res, next) => {
 exports.updateProduct = factory.updateOne(Product);
 exports.deleteProduct = factory.deleteOne(Product);
 exports.deleteManyProducts = catchAsync(async (req, res) => {
-  console.log(req.body)
   const newProducts = await Product.updateMany(
     { _id: { $in: req.body } },
     { $set: { deleted: true } }
