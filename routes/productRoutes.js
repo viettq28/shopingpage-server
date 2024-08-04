@@ -13,5 +13,6 @@ router.use(authCtrl.restrictTo('admin'));
 router.post('/', productCtrl.uploadImage, productCtrl.createProduct);
 router.patch('/:id', productCtrl.updateProduct);
 router.delete('/:id', productCtrl.deleteProduct);
+router.delete('/', productCtrl.deleteManyProducts);
 
 module.exports = router;

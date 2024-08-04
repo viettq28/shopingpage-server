@@ -33,7 +33,6 @@ const upload = multer({
   fileFilter: multerFilter,
 });
 
-
 exports.uploadImage = upload.array('images', 5);
 exports.getAllProducts = factory.getAll(Product);
 exports.getProduct = factory.getOne(Product);
@@ -57,3 +56,19 @@ exports.createProduct = catchAsync(async (req, res, next) => {
 
 exports.updateProduct = factory.updateOne(Product);
 exports.deleteProduct = factory.deleteOne(Product);
+exports.deleteManyProducts = catchAsync(async (req, res) => {
+  console.log(req.body)
+  const newProducts = await Product.updateMany(
+    { _id: { $in: req.body } },
+    { $set: { deleted: true } }
+  );
+
+  if (!newProducts) {
+    return next(new AppError('No document found with that ID', 404));
+  }
+
+  res.status(204).json({
+    status: 'success',
+    data: newProducts,
+  });
+});

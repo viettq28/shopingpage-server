@@ -9,7 +9,7 @@ router.get(
   '/',
   catchAsync(async (req, res, next) => {
     const userNumber = await User.countDocuments({ role: { $ne: 'admin' } });
-    const orderStat = await Order.aggregate([
+    const [{ orderNumber, earning }] = await Order.aggregate([
       {
         $group: {
           _id: null,
