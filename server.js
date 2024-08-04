@@ -20,7 +20,7 @@ const server = app.listen(port, () => {
 
 const io = init(server, {
   cors: {
-    origin: 'http://localhost:3000',
+    origin: process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : '*',
     credentials: true,
   },
 });
