@@ -23,7 +23,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 // Implement cors
 app.use(cors({
-  origin: 'https://viettq-shop.netlify.app/',
+  origin: process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : process.env.CORS_ORIGIN,
   credentials: true,
 }));
 // Serving static files
@@ -53,7 +53,7 @@ app.use(globalErrorHandler);
 
 process.on('SIGTERM', () => {
   server.close(() => {
-    console.log("SERVER TERMINATED");
+    console.log("SERVER TERMINATED"); 
   });
 })
 
