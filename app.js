@@ -23,7 +23,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 // Implement cors
 app.use(cors({
-  origin: process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : '*',
+  origin: 'https://viettq-shop.netlify.app/',
   credentials: true,
 }));
 // Serving static files
